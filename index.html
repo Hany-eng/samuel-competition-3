@@ -5,125 +5,305 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مسابقة سفر صموئيل الأول - الأصحاح الثالث</title>
     <style>
-        body { font-family: 'Cairo', Tahoma, sans-serif; background-color: #f4f6f9; color: #333; margin: 0; padding: 20px; direction: rtl; text-align: right; }
-        .container { max-width: 650px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        h1 { text-align: center; color: #2c3e50; font-size: 22px; margin-bottom: 5px; }
-        .subtitle { text-align: center; color: #7f8c8d; font-size: 14px; margin-bottom: 25px; }
-        .form-group { margin-bottom: 20px; }
-        label { display: block; font-weight: bold; margin-bottom: 8px; color: #34495e; }
-        input[type="text"] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
-        .question-box { background: #f9fbfd; border: 1px solid #e1e8ed; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
-        .question-title { font-weight: bold; margin-bottom: 10px; color: #2c3e50; }
-        .options label { display: block; font-weight: normal; margin-bottom: 5px; cursor: pointer; }
-        button { background: #27ae60; color: white; border: none; padding: 12px 20px; font-size: 16px; border-radius: 6px; cursor: pointer; width: 100%; font-weight: bold; transition: background 0.3s; }
-        button:hover { background: #219653; }
-        .loading { display: none; text-align: center; color: #e67e22; font-weight: bold; margin-top: 15px; }
-        .success-msg { display: none; text-align: center; color: #27ae60; font-weight: bold; font-size: 18px; margin-top: 15px; background: #e8f8f5; padding: 15px; border-radius: 6px; }
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
+        
+        body { 
+            font-family: 'Cairo', Tahoma, sans-serif; 
+            background: linear-gradient(135deg, #74b9ff, #a29bfe); 
+            color: #2d3436; 
+            margin: 0; 
+            padding: 20px; 
+            direction: rtl; 
+            text-align: right; 
+            min-height: 100vh;
+        }
+        .container { 
+            max-width: 680px; 
+            margin: 0 auto; 
+            background: #ffffff; 
+            padding: 35px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
+        }
+        h1 { 
+            text-align: center; 
+            color: #0984e3; 
+            font-size: 26px; 
+            font-weight: 900;
+            margin-bottom: 5px; 
+        }
+        .subtitle { 
+            text-align: center; 
+            color: #e17055; 
+            font-size: 16px; 
+            font-weight: 700;
+            margin-bottom: 30px; 
+        }
+        .form-group { 
+            margin-bottom: 25px; 
+        }
+        label { 
+            display: block; 
+            font-weight: 700; 
+            margin-bottom: 8px; 
+            color: #2d3436; 
+            font-size: 15px;
+        }
+        input[type="text"] { 
+            width: 100%; 
+            padding: 12px 15px; 
+            border: 2px solid #dfe6e9; 
+            border-radius: 10px; 
+            box-sizing: border-box; 
+            font-size: 15px; 
+            font-family: 'Cairo', sans-serif;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus {
+            border-color: #0984e3;
+            outline: none;
+        }
+        .question-box { 
+            background: #f1f2f6; 
+            border-right: 5px solid #0984e3; 
+            padding: 20px; 
+            border-radius: 12px; 
+            margin-bottom: 20px; 
+        }
+        .question-box:nth-child(even) {
+            border-right-color: #e17055;
+            background: #fff5f2;
+        }
+        .question-title { 
+            font-weight: 900; 
+            margin-bottom: 12px; 
+            color: #2d3436; 
+            font-size: 16px;
+        }
+        .options label { 
+            display: block; 
+            font-weight: 600; 
+            margin-bottom: 10px; 
+            cursor: pointer; 
+            background: #ffffff;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid #dfe6e9;
+            transition: all 0.2s;
+        }
+        .options label:hover {
+            background: #dfe6e9;
+        }
+        .options input[type="radio"] {
+            margin-left: 10px;
+        }
+        .btn-submit { 
+            background: linear-gradient(135deg, #00b894, #00cec9); 
+            color: white; 
+            border: none; 
+            padding: 14px 20px; 
+            font-size: 18px; 
+            border-radius: 12px; 
+            cursor: pointer; 
+            width: 100%; 
+            font-weight: 900; 
+            font-family: 'Cairo', sans-serif;
+            transition: transform 0.2s, box-shadow 0.2s; 
+            margin-top: 15px; 
+            box-shadow: 0 4px 15px rgba(0,184,148,0.4);
+        }
+        .btn-submit:hover { 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,184,148,0.6);
+        }
+        .whatsapp-btn1 { 
+            background: #25D366; 
+            color: white; 
+            border: none; 
+            padding: 14px 20px; 
+            font-size: 16px; 
+            border-radius: 12px; 
+            cursor: pointer; 
+            width: 100%; 
+            font-weight: 700; 
+            text-align: center; 
+            text-decoration: none; 
+            display: block; 
+            margin-top: 12px; 
+            box-sizing: border-box; 
+            box-shadow: 0 4px 15px rgba(37,211,102,0.3);
+        }
+        .whatsapp-btn2 { 
+            background: #075e54; 
+            color: white; 
+            border: none; 
+            padding: 14px 20px; 
+            font-size: 16px; 
+            border-radius: 12px; 
+            cursor: pointer; 
+            width: 100%; 
+            font-weight: 700; 
+            text-align: center; 
+            text-decoration: none; 
+            display: block; 
+            margin-top: 12px; 
+            box-sizing: border-box; 
+            box-shadow: 0 4px 15px rgba(7,94,84,0.3);
+        }
+        #resultSection { 
+            display: none; 
+            text-align: center; 
+            background: #e8f8f5; 
+            padding: 25px; 
+            border-radius: 15px; 
+            margin-top: 20px; 
+            border: 2px dashed #00b894;
+        }
+        .error-msg { 
+            color: #d63031; 
+            font-weight: 700; 
+            text-align: center; 
+            font-size: 18px; 
+            padding: 30px; 
+            background: #ffeaa7;
+            border-radius: 12px;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <h1>مسابقة سفر صموئيل الأول</h1>
-    <div class="subtitle">الأصحاح الثالث</div>
+    <div class="subtitle">✨ الأصحاح الثالث ✨</div>
 
-    <form id="quizForm">
-        <div class="form-group">
-            <label for="studentName">اسم المتسابق ثلاثي:</label>
-            <input type="text" id="studentName" name="studentName" required placeholder="اكتب اسمك هنا...">
-        </div>
-
-        <!-- المجموعة الأولى -->
-        <div class="question-box">
-            <div class="question-title">المجموعة الأولى: صح أم خطأ</div>
-            
-            <p>1. كان كلام الرب عزيزًا في تلك الأيام، ولم تكن الرؤيا قد انكشفت.</p>
-            <div class="options">
-                <label><input type="radio" name="q1" value="صح" required> صح</label>
-                <label><input type="radio" name="q1" value="خطأ"> خطأ</label>
+    <div id="quizContainer">
+        <form id="quizForm">
+            <div class="form-group">
+                <label for="studentName">اسم المتسابق ثلاثي:</label>
+                <input type="text" id="studentName" name="studentName" required placeholder="اكتب اسمك هنا يا بطل...">
             </div>
 
-            <p style="margin-top: 15px;">2. استطاع صموئيل أن يميز صوت الرب من أول مرة.</p>
-            <div class="options">
-                <label><input type="radio" name="q2" value="صح" required> صح</label>
-                <label><input type="radio" name="q2" value="خطأ"> خطأ</label>
-            </div>
-        </div>
+            <!-- المجموعة الأولى -->
+            <div class="question-box">
+                <div class="question-title">📌 المجموعة الأولى: صح أم خطأ</div>
+                
+                <p><b>1.</b> كان كلام الرب عزيزًا في تلك الأيام، ولم تكن الرؤيا قد انكشفت.</p>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="صح" required> صح</label>
+                    <label><input type="radio" name="q1" value="خطأ"> خطأ</label>
+                </div>
 
-        <!-- المجموعة الثانية -->
-        <div class="question-box">
-            <div class="question-title">المجموعة الثانية: أكمل العبارات التالية</div>
-            
-            <p>3. قال صموئيل للرب: تكلم يا رب لأن ............... سامع.</p>
-            <input type="text" name="q3" required placeholder="اكتب الإجابة...">
-
-            <p style="margin-top: 15px;">4. وعرف جميع إسرائيل من دان إلى بئر سبع أن صموئيل قد اؤتمن نبيًا للرب.</p>
-            <input type="text" name="q4" required placeholder="اكتب الإجابة...">
-        </div>
-
-        <!-- المجموعة الثالثة -->
-        <div class="question-box">
-            <div class="question-title">المجموعة الثالثة: اختر الإجابة الصحيحة</div>
-            
-            <p>5. عندما أعلن الله عن الدينونة التي ستحدث لبيت عالي، قال:</p>
-            <div class="options">
-                <label><input type="radio" name="q5" value="أ) هأنذا أفعل أمرًا في إسرائيل" required> أ) هأنذا أفعل أمرًا في إسرائيل</label>
-                <label><input type="radio" name="q5" value="ب) لن يحدث شيء لبيت عالي"> ب) لن يحدث شيء لبيت عالي</label>
-                <label><input type="radio" name="q5" value="ج) سأبارك بيت عالي إلى الأبد"> ج) سأبارك بيت عالي إلى الأبد</label>
+                <p style="margin-top: 20px;"><b>2.</b> استطاع صموئيل أن يميز صوت الرب من أول مرة.</p>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="صح" required> صح</label>
+                    <label><input type="radio" name="q2" value="خطأ"> خطأ</label>
+                </div>
             </div>
 
-            <p style="margin-top: 15px;">6. عندما سمع عالي كلام صموئيل، قال:</p>
-            <div class="options">
-                <label><input type="radio" name="q6" value="أ) الرب لا يسمع صلواتنا" required> أ) الرب لا يسمع صلواتنا</label>
-                <label><input type="radio" name="q6" value="ب) هو الرب، ما يحسن في عينيه يفعل"> ب) هو الرب، ما يحسن في عينيه يفعل</label>
-                <label><input type="radio" name="q6" value="ج) لماذا لم تخبرني من البداية؟"> ج) لماذا لم تخبرني من البداية؟</label>
-            </div>
-        </div>
+            <!-- المجموعة الثانية -->
+            <div class="question-box">
+                <div class="question-title">📌 المجموعة الثانية: أكمل العبارات التالية</div>
+                
+                <p><b>3.</b> قال صموئيل للرب: تكلم يا رب لأن ............... سامع.</p>
+                <input type="text" name="q3" required placeholder="اكتب الإجابة هنا...">
 
-        <button type="submit" id="submitBtn">إرسال الإجابات</button>
-        <div class="loading" id="loadingMsg">جاري إرسال إجاباتك... يرجى الانتظار...</div>
-        <div class="success-msg" id="successMsg">تم إرسال إجاباتك بنجاح يا بطل! شكراً لمشاركتك.</div>
-    </form>
+                <p style="margin-top: 20px;"><b>4.</b> وعرف جميع إسرائيل من دان إلى بئر سبع أن صموئيل قد اؤتمن ............... للرب.</p>
+                <input type="text" name="q4" required placeholder="اكتب الإجابة هنا...">
+            </div>
+
+            <!-- المجموعة الثالثة -->
+            <div class="question-box">
+                <div class="question-title">📌 المجموعة الثالثة: اختر الإجابة الصحيحة</div>
+                
+                <p><b>5.</b> عندما أعلن الله عن الدينونة التي ستحدث لبيت عالي، قال:</p>
+                <div class="options">
+                    <label><input type="radio" name="q5" value="أ) هأنذا أفعل أمرًا في إسرائيل" required> أ) هأنذا أفعل أمرًا في إسرائيل</label>
+                    <label><input type="radio" name="q5" value="ب) لن يحدث شيء لبيت عالي"> ب) لن يحدث شيء لبيت عالي</label>
+                    <label><input type="radio" name="q5" value="ج) سأبارك بيت عالي إلى الأبد"> ج) سأبارك بيت عالي إلى الأبد</label>
+                </div>
+
+                <p style="margin-top: 20px;"><b>6.</b> عندما سمع عالي كلام صموئيل، قال:</p>
+                <div class="options">
+                    <label><input type="radio" name="q6" value="أ) الرب لا يسمع صلواتنا" required> أ) الرب لا يسمع صلواتنا</label>
+                    <label><input type="radio" name="q6" value="ب) هو الرب، ما يحسن في عينيه يفعل"> ب) هو الرب، ما يحسن في عينيه يفعل</label>
+                    <label><input type="radio" name="q6" value="ج) لماذا لم تخبرني من البداية؟"> ج) لماذا لم تخبرني من البداية؟</label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit">🚀 إرسال الإجابات وعرض النتيجة</button>
+        </form>
+    </div>
+
+    <!-- قسم النتيجة وأزرار الواتساب -->
+    <div id="resultSection">
+        <h2 style="color: #00b894; margin-top: 0; font-weight: 900;">🎉 بطل عظيم!</h2>
+        <p id="scoreText" style="font-size: 20px; font-weight: 700; color: #2d3436; line-height: 1.6;"></p>
+        <p style="font-weight: 600; color: #636e72; margin-top: 15px;">اختر الأسرة التي تريد إرسال النتيجة إليها عبر الواتساب:</p>
+        
+        <a id="waCross" href="#" target="_blank" class="whatsapp-btn1">📲 إرسال إلى أسرة لباس الصليب</a>
+        <a id="waMartyrs" href="#" target="_blank" class="whatsapp-btn2">📲 إرسال إلى أسرة الشهيدات</a>
+    </div>
+
+    <div id="errorSection" class="error-msg" style="display: none;">
+        ⚠️ عذراً يا بطل! لقد استنفذت محاولاتك الـ 2 المسموح بها لهذه المسابقة.
+    </div>
 </div>
 
 <script>
-    // رابط Google Apps Script الخاص بكِ (اتركيه كما هو الآن أو ضعي الرابط إن وجد)
-    const scriptURL = '';
+    let attempts = localStorage.getItem('samuel_quiz_attempts') ? parseInt(localStorage.getItem('samuel_quiz_attempts')) : 0;
+
+    if (attempts >= 2) {
+        document.getElementById('quizContainer').style.display = 'none';
+        document.getElementById('errorSection').style.display = 'block';
+    }
 
     const form = document.getElementById('quizForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const loadingMsg = document.getElementById('loadingMsg');
-    const successMsg = document.getElementById('successMsg');
-
-    form.addEventListener('submit', e => {
+    form.addEventListener('submit', function(e) {
         e.preventDefault();
-        submitBtn.style.display = 'none';
-        loadingMsg.style.display = 'block';
 
-        const formData = new FormData(form);
-        
-        if (!scriptURL) {
-            setTimeout(() => {
-                loadingMsg.style.display = 'none';
-                successMsg.style.display = 'block';
-                form.reset();
-            }, 1000);
+        if (attempts >= 2) {
+            alert('لقد انتهت محاولاتك!');
             return;
         }
 
-        fetch(scriptURL, { method: 'POST', body: formData })
-            .then(response => {
-                loadingMsg.style.display = 'none';
-                successMsg.style.display = 'block';
-                form.reset();
-            })
-            .catch(error => {
-                loadingMsg.style.display = 'none';
-                submitBtn.style.display = 'block';
-                alert('حدث خطأ في الإرسال، تأكد من الاتصال بالإنترنت وحاول مرة أخرى.');
-            });
+        attempts++;
+        localStorage.setItem('samuel_quiz_attempts', attempts);
+
+        const studentName = document.getElementById('studentName').value.trim();
+
+        let score = 0;
+        
+        const q1 = document.querySelector('input[name="q1"]:checked');
+        if (q1 && q1.value === "صح") score++;
+
+        const q2 = document.querySelector('input[name="q2"]:checked');
+        if (q2 && q2.value === "خطأ") score++;
+
+        const q3 = document.querySelector('input[name="q3"]').value.trim();
+        if (q3.includes("انا") || q3.includes("أنا") || q3.includes("سامع")) score++;
+
+        const q4 = document.querySelector('input[name="q4"]').value.trim();
+        if (q4.includes("نبيا") || q4.includes("نبيًا") || q4.includes("نبيا للرب")) score++;
+
+        const q5 = document.querySelector('input[name="q5"]:checked');
+        if (q5 && q5.value.includes("هأنذا أفعل")) score++;
+
+        const q6 = document.querySelector('input[name="q6"]:checked');
+        if (q6 && q6.value.includes("هو الرب")) score++;
+
+        document.getElementById('quizContainer').style.display = 'none';
+        document.getElementById('resultSection').style.display = 'block';
+        document.getElementById('scoreTextinnerHTML', '');
+        document.getElementById('scoreText').innerHTML = `المتسابق: <span style="color:#0984e3;">${studentName}</span><br>درجتك هي: <span style="color:#d63031; font-size:24px;">${score}</span> من 6`;
+
+        let message = `مرحباً، أنا الطالب: ${studentName} \nنتيجة مسابقة سفر صموئيل الأول (الأصحاح الثالث) هي: ${score} من 6 (المحاولة رقم ${attempts})`;
+        let encodedMessage = encodeURIComponent(message);
+
+        document.getElementById('waCross').href = `https://wa.me/201211970083?text=${encodedMessage}`;
+        document.getElementById('waMartyrs').href = `https://wa.me/201274102074?text=${encodedMessage}`;
     });
 </script>
 
 </body>
 </html>
+
