@@ -57,6 +57,7 @@
             box-sizing: border-box; 
             font-size: 15px; 
             font-family: 'Cairo', sans-serif;
+            background: #fff;
             transition: border-color 0.3s;
         }
         input[type="text"]:focus {
@@ -116,12 +117,11 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(0,184,148,0.6);
         }
-        .whatsapp-btn1 { 
-            background: #25D366; 
+        .whatsapp-btn1, .whatsapp-btn2 { 
             color: white; 
             border: none; 
             padding: 14px 20px; 
-            font-size: 16px; 
+            font-size: 15px; 
             border-radius: 12px; 
             cursor: pointer; 
             width: 100%; 
@@ -131,25 +131,10 @@
             display: block; 
             margin-top: 12px; 
             box-sizing: border-box; 
-            box-shadow: 0 4px 15px rgba(37,211,102,0.3);
         }
-        .whatsapp-btn2 { 
-            background: #075e54; 
-            color: white; 
-            border: none; 
-            padding: 14px 20px; 
-            font-size: 16px; 
-            border-radius: 12px; 
-            cursor: pointer; 
-            width: 100%; 
-            font-weight: 700; 
-            text-align: center; 
-            text-decoration: none; 
-            display: block; 
-            margin-top: 12px; 
-            box-sizing: border-box; 
-            box-shadow: 0 4px 15px rgba(7,94,84,0.3);
-        }
+        .whatsapp-btn1 { background: #25D366; box-shadow: 0 4px 15px rgba(37,211,102,0.3); }
+        .whatsapp-btn2 { background: #075e54; box-shadow: 0 4px 15px rgba(7,94,84,0.3); }
+        
         #resultSection { 
             display: none; 
             text-align: center; 
@@ -168,6 +153,15 @@
             background: #ffeaa7;
             border-radius: 12px;
         }
+        .copy-notice {
+            background: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
@@ -177,10 +171,10 @@
     <div class="subtitle">✨ الأصحاح الثالث ✨</div>
 
     <div id="quizContainer">
-        <form id="quizForm">
+        <form id="quizForm" autocomplete="off">
             <div class="form-group">
                 <label for="studentName">اسم المتسابق ثلاثي:</label>
-                <input type="text" id="studentName" name="studentName" required placeholder="اكتب اسمك هنا يا بطل...">
+                <input type="text" id="studentName" name="studentName" required autocomplete="off" placeholder="اكتب اسمك هنا يا بطل...">
             </div>
 
             <!-- المجموعة الأولى -->
@@ -205,10 +199,10 @@
                 <div class="question-title">📌 المجموعة الثانية: أكمل العبارات التالية</div>
                 
                 <p><b>3.</b> قال صموئيل للرب: تكلم يا رب لأن ............... سامع.</p>
-                <input type="text" name="q3" required placeholder="اكتب الإجابة هنا...">
+                <input type="text" name="q3" required autocomplete="off" placeholder="اكتب الإجابة هنا...">
 
                 <p style="margin-top: 20px;"><b>4.</b> وعرف جميع إسرائيل من دان إلى بئر سبع أن صموئيل قد اؤتمن ............... للرب.</p>
-                <input type="text" name="q4" required placeholder="اكتب الإجابة هنا...">
+                <input type="text" name="q4" required autocomplete="off" placeholder="اكتب الإجابة هنا...">
             </div>
 
             <!-- المجموعة الثالثة -->
@@ -234,14 +228,19 @@
         </form>
     </div>
 
-    <!-- قسم النتيجة وأزرار الواتساب -->
+    <!-- قسم النتيجة وأزرار الواتساب المباشرة -->
     <div id="resultSection">
         <h2 style="color: #00b894; margin-top: 0; font-weight: 900;">🎉 بطل عظيم!</h2>
         <p id="scoreText" style="font-size: 20px; font-weight: 700; color: #2d3436; line-height: 1.6;"></p>
-        <p style="font-weight: 600; color: #636e72; margin-top: 15px;">اختر الأسرة التي تريد إرسال النتيجة إليها عبر الواتساب:</p>
         
-        <a id="waCross" href="#" target="_blank" class="whatsapp-btn1">📲 إرسال إلى أسرة لباس الصليب</a>
-        <a id="waMartyrs" href="#" target="_blank" class="whatsapp-btn2">📲 إرسال إلى أسرة الشهيدات</a>
+        <div class="copy-notice">
+            📋 تم نسخ رسالة النتيجة تلقائياً! اضغط على زر الأسرة أدناه، ثم الصقها في الواتساب مباشرة.
+        </div>
+
+        <p style="font-weight: 600; color: #636e72; margin-top: 15px;">اختر الأسرة للإرسال عبر الواتساب:</p>
+        
+        <a id="waCross" href="#" onclick="copyAndOpen('201211970083')" class="whatsapp-btn1">📲 إرسال إلى أسرة لباس الصليب (01211970083)</a>
+        <a id="waMartyrs" href="#" onclick="copyAndOpen('201274102074')" class="whatsapp-btn2">📲 إرسال إلى أسرة الشهيدات (01274102074)</a>
     </div>
 
     <div id="errorSection" class="error-msg" style="display: none;">
@@ -256,6 +255,8 @@
         document.getElementById('quizContainer').style.display = 'none';
         document.getElementById('errorSection').style.display = 'block';
     }
+
+    let globalMessage = "";
 
     const form = document.getElementById('quizForm');
     form.addEventListener('submit', function(e) {
@@ -293,15 +294,20 @@
 
         document.getElementById('quizContainer').style.display = 'none';
         document.getElementById('resultSection').style.display = 'block';
-        document.getElementById('scoreTextinnerHTML', '');
         document.getElementById('scoreText').innerHTML = `المتسابق: <span style="color:#0984e3;">${studentName}</span><br>درجتك هي: <span style="color:#d63031; font-size:24px;">${score}</span> من 6`;
 
-        let message = `مرحباً، أنا الطالب: ${studentName} \nنتيجة مسابقة سفر صموئيل الأول (الأصحاح الثالث) هي: ${score} من 6 (المحاولة رقم ${attempts})`;
-        let encodedMessage = encodeURIComponent(message);
+        globalMessage = `مرحباً، أنا الطالب: ${studentName} \nنتيجة مسابقة سفر صموئيل الأول (الأصحاح الثالث) هي: ${score} من 6 (المحاولة رقم ${attempts})`;
 
-        document.getElementById('waCross').href = `https://wa.me/201211970083?text=${encodedMessage}`;
-        document.getElementById('waMartyrs').href = `https://wa.me/201274102074?text=${encodedMessage}`;
+        // نسخ النص تلقائياً لحافظة الجهاز
+        navigator.clipboard.writeText(globalMessage).catch(err => {
+            console.log('Could not copy text: ', err);
+        });
     });
+
+    function copyAndOpen(phone) {
+        navigator.clipboard.writeText(globalMessage);
+        window.open(`https://wa.me/${phone}?text=` + encodeURIComponent(globalMessage), '_blank');
+    }
 </script>
 
 </body>
